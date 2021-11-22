@@ -87,6 +87,14 @@
     </section>
   </main>
 
+    <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "ba08fb1fe2904204b8c19ecb25a5e961"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -102,6 +110,107 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    TrackJS.track('Testing TrackJS!');
+
+    // Log Button
+    errorBtns[0].addEventListener('click', event => {
+      console.log("hello");
+    });
+
+    // Error Button
+    errorBtns[1].addEventListener('click', event => {
+      console.error("error message");
+    });
+
+    // Count Button
+    errorBtns[2].addEventListener('click', event => {
+      console.count("Count");
+    });
+
+    // Warning Button
+    errorBtns[3].addEventListener('click', event => {
+      console.warn("warning")
+    });
+
+    // Assert Button
+    errorBtns[4].addEventListener('click', event => {
+      console.assert(false);
+    });
+
+    // CLear Button
+    errorBtns[5].addEventListener('click', event => {
+      console.clear();
+    });
+
+    // Dir Button
+    errorBtns[6].addEventListener('click', event => {
+      console.dir(document.location);
+    });
+
+    // Dirxml button
+    errorBtns[7].addEventListener('click', event => {
+      console.log(errorBtns[7]);
+    });
+
+    // Group Start Button
+    errorBtns[8].addEventListener('click', event => {
+      console.group("Group");
+    });
+
+    // Group End Button
+    errorBtns[9].addEventListener('click', event => {
+      console.groupEnd("Group");
+    });
+
+    // Table Button
+    errorBtns[10].addEventListener('click', event => {
+      console.table(["first", "last"]);
+    });
+
+    // Start Timer Button
+    errorBtns[11].addEventListener('click', event => {
+      console.time("Time");
+    });
+
+    // End Timer Button
+    errorBtns[12].addEventListener('click', event => {
+      console.timeEnd("Time");
+    });
+
+    // Trace Button
+    errorBtns[13].addEventListener('click', event => {
+      function first() {
+        function second() {
+          function third() {
+            console.trace();
+          }
+          third();
+        }
+        second();
+      }
+      first();
+    });
+
+    class GlobalError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "Global Error";
+      }
+    }
+
+    // Global Error Button
+    errorBtns[14].addEventListener('click', event => {
+      let error = new GlobalError("Global Error");
+      try {
+        document.getElementById("button").innerHTML = "woop";
+      } catch(error) {
+        alert(error.message);
+        throw error;
+      } finally {
+        console.log("global error")
+      }
+    });
+
   </script>
 </body>
 
